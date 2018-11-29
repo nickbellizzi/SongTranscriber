@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/app_background"
+    tools:context=".MainActivity">
+
+
+        <Button
+            android:id="@+id/menu_new_song"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/new_song_option"
+            android:textSize="24sp"
+            android:onClick="onGetNewSongInfo"
+            tools:layout_editor_absoluteX="108dp"
+            tools:layout_editor_absoluteY="153dp" />
+
+        <Button
+            android:id="@+id/menu_set_times"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="@string/set_time_option"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <Button
+            android:id="@+id/men_play_song"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="@string/play_song_option"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="257dp" />
+</LinearLayout>

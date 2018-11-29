@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/app_background">
+
+    <EditText
+        android:id="@+id/input_song"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_margin="15dp"
+        android:background="?attr/colorButtonNormal"
+        android:gravity="start"
+        android:hint="@string/song_info_submit_hint"
+        android:inputType="textMultiLine|textLongMessage"
+        android:padding="7dp"
+        tools:ignore="Autofill" />
+
+    <Button
+        android:id="@+id/submit_song_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="@string/submit_song_info_button_text"
+        android:textSize="24sp"/>
+</LinearLayout>

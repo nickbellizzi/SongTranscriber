@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Song Transcriber</string>
+    <string name="new_song">New Song</string>
+    <string name="new_song_option">New Song</string>
+    <string name="set_time_option">Set Timing</string>
+    <string name="play_song_option">Play Song</string>
+    <string name="submit_song_info_button_text">Submit Song Info</string>
+    <string name="song_info_submit_hint">Enter song info (title/lyrics?) here</string>
+</resources>
