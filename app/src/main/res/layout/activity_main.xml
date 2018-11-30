@@ -11,6 +11,14 @@
     tools:context=".MainActivity">
 
 
+        <ImageView
+            android:id="@+id/app_icon_header"
+            android:layout_width="wrap_content"
+            android:layout_height="243dp"
+            android:contentDescription="@string/app_icon_header_descr"
+            android:cropToPadding="true"
+            app:srcCompat="@drawable/new_icon" />
+
         <Button
             android:id="@+id/menu_new_song"
             android:layout_width="170dp"
@@ -21,15 +29,6 @@
             android:onClick="onGetNewSongInfo"
             tools:layout_editor_absoluteX="108dp"
             tools:layout_editor_absoluteY="153dp" />
-
-        <Button
-            android:id="@+id/menu_set_times"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:text="@string/set_time_option"
-            android:textSize="24sp"
-            tools:layout_editor_absoluteX="107dp"
-            tools:layout_editor_absoluteY="205dp" />
 
         <Button
             android:id="@+id/men_play_song"

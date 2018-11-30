@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onGetNewSongInfo(View view) {
         Intent getNewSongInfo = new Intent(this, NewSongMenu.class);
+        startActivityForResult(getNewSongInfo, RESULT_ONE);
     }
 
     @Override

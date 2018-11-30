@@ -8,4 +8,5 @@
     <string name="song_info_submit_hint">Copy and paste lyrics</string>
     <string name="song_title_hint">Song Title</string>
     <string name="artist_name_input">Artist</string>
+    <string name="app_icon_header_descr">App Icon Header</string>
 </resources>
