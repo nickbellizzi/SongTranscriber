@@ -9,4 +9,7 @@
     <string name="song_title_hint">Song Title</string>
     <string name="artist_name_input">Artist</string>
     <string name="app_icon_header_descr">App Icon Header</string>
+    <string name="start_timings_button_text">Start Timings</string>
+    <string name="instructions_text">Instructions:\nBegin playing the song &amp; hit Start\nClick Next at the end of each line</string>
+    <string name="next_timings_button">Next</string>
 </resources>

@@ -14,6 +14,11 @@ public class SongInfo implements Serializable {
         this.title = title;
         this.artist = artist;
         this.lyrics = lyrics;
+        lines = lyrics.split("\\r?\\n");
+    }
+
+    public String[] getLines() {
+        return lines;
     }
 
     @Override

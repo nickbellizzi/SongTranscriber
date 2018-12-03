@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<SongInfo> listOfSongs; // am i supposed to do this
+    private List<SongInfo> listOfSongs; // idk
 
     private final static int RESULT_ONE = 1;
     private final static int RESULT_TWO = 2;
@@ -32,8 +32,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        SongInfo newSubmission = (SongInfo) data.getSerializableExtra("songSubmission");
-
-        listOfSongs.add(newSubmission);
+        if (requestCode == RESULT_ONE && resultCode == RESULT_OK) {
+            SongInfo newSubmission = (SongInfo) data.getSerializableExtra("songSubmission");
+            System.out.println("HELP ME " + newSubmission.toString() + " lines : " + newSubmission.getLines().length);
+            listOfSongs.add(newSubmission);
+            /*Intent getTimings = new Intent(this, NewSongMenu.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("songForTiming", newSubmission);
+            getTimings.putExtras(bundle);
+            startActivity(getTimings);*/
+        }
     }
 }

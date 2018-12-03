@@ -19,6 +19,9 @@
         <activity android:name=".NewSongMenu"
             android:label="New Song"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".SetTimingsPage"
+            android:label="Set Timings"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

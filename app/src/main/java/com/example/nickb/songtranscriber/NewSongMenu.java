@@ -3,6 +3,7 @@ package com.example.nickb.songtranscriber;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -11,7 +12,6 @@ public class NewSongMenu extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_song_layout);
-        Intent menuIntent = getIntent(); //probably irrelevant
     }
 
     public void onSubmitSongInformation(View view) {
@@ -23,13 +23,16 @@ public class NewSongMenu extends Activity {
         EditText lyricsText = (EditText) findViewById(R.id.input_lyrics);
         String songLyrics = String.valueOf(lyricsText.getText());
         SongInfo newSong = new SongInfo(songTitle, artistName, songLyrics);
+        Log.i(NewSongMenu.class.getName(), "sos " + newSong.toString());
         // handle errors
         Intent returnToMenu = new Intent();
         Bundle bundle = new Bundle();
         bundle.putSerializable("songSubmission", newSong);
         returnToMenu.putExtras(bundle);
-
         setResult(RESULT_OK, returnToMenu);
         finish();
+        //start timer on Start
+        //end and begin on each click of Next
+        //(double) System.nanoTime() * 1000000000
     }
 }
