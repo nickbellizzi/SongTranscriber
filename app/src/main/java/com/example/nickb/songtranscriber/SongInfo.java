@@ -1,6 +1,7 @@
 package com.example.nickb.songtranscriber;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SongInfo implements Serializable {
     private String title;
@@ -19,6 +20,11 @@ public class SongInfo implements Serializable {
 
     public String[] getLines() {
         return lines;
+    }
+
+    public void setTimings(List<Long> timingsList) {
+        //convert to array
+        //yeah that's basically it
     }
 
     @Override

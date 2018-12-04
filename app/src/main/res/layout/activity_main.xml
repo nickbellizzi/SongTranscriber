@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/play_song_option"
             android:textSize="24sp"
+            android:onClick="onPlaySongMenu"
             tools:layout_editor_absoluteX="107dp"
             tools:layout_editor_absoluteY="257dp" />
 </LinearLayout>

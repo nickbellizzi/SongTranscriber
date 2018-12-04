@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(getNewSongInfo, RESULT_ONE);
     }
 
+    public void onPlaySongMenu(View view) {
+        Intent openPlayMenu = new Intent(this, PlaySongMenu.class);
+        startActivity(openPlayMenu);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -13,6 +13,7 @@ import java.util.List;
 public class SetTimingsPage extends Activity {
 
     private SongInfo songToSet;
+    private String[] lines;
     private long start, end;
     private List<Long> timeDifferences = new ArrayList<>();
     private TextView instructionsTV, lineTV;
@@ -21,9 +22,10 @@ public class SetTimingsPage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_song_layout);
+        setContentView(R.layout.set_timings_layout);
         Intent passedObject = getIntent();
         songToSet = (SongInfo) passedObject.getSerializableExtra("songForTiming");
+        lines = songToSet.getLines();
         instructionsTV = (TextView) findViewById(R.id.instructions_text);
         lineTV = (TextView) findViewById(R.id.line_text_display);
         startBtn = (Button) findViewById(R.id.start_timings_button);

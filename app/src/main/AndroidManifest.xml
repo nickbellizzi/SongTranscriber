@@ -22,6 +22,9 @@
         <activity android:name=".SetTimingsPage"
             android:label="Set Timings"
             android:theme="@style/AppTheme" />
+        <activity android:name=".PlaySongMenu"
+            android:label="Menu to Play Song"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
