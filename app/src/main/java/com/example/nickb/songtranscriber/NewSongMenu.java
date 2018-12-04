@@ -31,8 +31,5 @@ public class NewSongMenu extends Activity {
         returnToMenu.putExtras(bundle);
         setResult(RESULT_OK, returnToMenu);
         finish();
-        //start timer on Start
-        //end and begin on each click of Next
-        //(double) System.nanoTime() * 1000000000
     }
 }

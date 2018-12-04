@@ -15,6 +15,7 @@ public class SetTimingsPage extends Activity {
     private SongInfo songToSet;
     private String[] lines;
     private long start, end;
+    private int lineNumber;
     private List<Long> timeDifferences = new ArrayList<>();
     private TextView instructionsTV, lineTV;
     private Button startBtn, nextBtn;
@@ -26,6 +27,7 @@ public class SetTimingsPage extends Activity {
         Intent passedObject = getIntent();
         songToSet = (SongInfo) passedObject.getSerializableExtra("songForTiming");
         lines = songToSet.getLines();
+        lineNumber = 0;
         instructionsTV = (TextView) findViewById(R.id.instructions_text);
         lineTV = (TextView) findViewById(R.id.line_text_display);
         startBtn = (Button) findViewById(R.id.start_timings_button);
@@ -37,14 +39,27 @@ public class SetTimingsPage extends Activity {
         startBtn.setVisibility(View.INVISIBLE);
         lineTV.setVisibility(View.VISIBLE);
         nextBtn.setVisibility(View.VISIBLE);
+        lineTV.setText(lines[lineNumber]);
+        lineNumber++;
         start = System.currentTimeMillis();
-        //display line 1
     }
 
     public void onNextLine(View view) {
         end = System.currentTimeMillis() - start;
         timeDifferences.add(end);
-        //display next line, etc
-        start = System.currentTimeMillis();
+        if (lineNumber < lines.length) {
+            lineTV.setText(lines[lineNumber]);
+            lineNumber++;
+            start = System.currentTimeMillis();
+        } else {
+            lineNumber = 0;
+            songToSet.setTimings(timeDifferences);
+            String displayTimings = "";
+            for (long time : timeDifferences) {
+                displayTimings += ((double)time / 1000) + ", ";
+            }
+            System.out.println(displayTimings);
+            finish();
+        }
     }
 }

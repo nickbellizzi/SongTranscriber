@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<SongInfo> listOfSongs; // idk
+    private List<SongInfo> listOfSongs;
 
     private final static int RESULT_ONE = 1;
     private final static int RESULT_TWO = 2;
@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
             SongInfo newSubmission = (SongInfo) data.getSerializableExtra("songSubmission");
             System.out.println("HELP ME " + newSubmission.toString() + " lines : " + newSubmission.getLines().length);
             listOfSongs.add(newSubmission);
-            /*Intent getTimings = new Intent(this, NewSongMenu.class);
+            Intent getTimings = new Intent(this, SetTimingsPage.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("songForTiming", newSubmission);
             getTimings.putExtras(bundle);
-            startActivity(getTimings);*/
+            startActivity(getTimings);
         }
     }
 }

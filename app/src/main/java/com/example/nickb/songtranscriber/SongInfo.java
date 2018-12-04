@@ -9,7 +9,7 @@ public class SongInfo implements Serializable {
     private String lyrics;
     private String[] lines;
     private String[] ipaTranscriptions;
-    private double[] lineTimings;
+    private long[] lineTimings;
 
     SongInfo(String title, String artist, String lyrics) {
         this.title = title;
@@ -23,8 +23,12 @@ public class SongInfo implements Serializable {
     }
 
     public void setTimings(List<Long> timingsList) {
-        //convert to array
-        //yeah that's basically it
+        lineTimings = new long[timingsList.size()];
+        int i = 0;
+        for (Long time : timingsList) {
+            lineTimings[i] = time;
+            i++;
+        }
     }
 
     @Override
