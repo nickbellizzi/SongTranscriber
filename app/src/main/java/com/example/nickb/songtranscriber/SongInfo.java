@@ -35,7 +35,7 @@ public class SongInfo implements Serializable {
 
     private void loadPrevious() {
         previous = new HashMap<>();
-        previous.put("isn't", "ˈɪzənt");
+        previous.put("isn't", "ˈɪzənt"); //do later
     }
 
     public String[] getLines() {
@@ -51,11 +51,6 @@ public class SongInfo implements Serializable {
     }
 
     public long[] getTimes() {
-        System.out.println("in get times");
-        if (lineTimings == null) {
-            System.out.println("i am done living");
-        }
-        //System.out.println(lineTimings.length);
         return lineTimings;
     }
 

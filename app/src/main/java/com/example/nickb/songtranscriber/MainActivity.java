@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == RESULT_ONE && resultCode == RESULT_OK) {
             SongInfo newSubmission = (SongInfo) data.getSerializableExtra("songSubmission");
-            System.out.println("HELP ME " + newSubmission.toString() + " lines : " + newSubmission.getLines().length);
+            System.out.println("New song " + newSubmission.toString() + " lines : " + newSubmission.getLines().length);
             listOfSongs.add(newSubmission);
             Intent getTimings = new Intent(this, SetTimingsPage.class);
             Bundle bundle = new Bundle();
