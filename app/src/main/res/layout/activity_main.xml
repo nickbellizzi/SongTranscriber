@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/new_song_option"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:onClick="onGetNewSongInfo"
             tools:layout_editor_absoluteX="108dp"
             tools:layout_editor_absoluteY="153dp" />
@@ -35,7 +35,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="@string/play_song_option"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:onClick="onPlaySongMenu"
             tools:layout_editor_absoluteX="107dp"
             tools:layout_editor_absoluteY="257dp" />

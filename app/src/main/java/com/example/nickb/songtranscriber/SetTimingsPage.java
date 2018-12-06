@@ -25,7 +25,7 @@ public class SetTimingsPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_timings_layout);
         Intent passedObject = getIntent();
-        songToSet = (SongInfo) passedObject.getSerializableExtra("songForTiming");
+        songToSet = (SongInfo) passedObject.getSerializableExtra("songForTiming"); //by value?????????
         lines = songToSet.getLines();
         lineNumber = 0;
         instructionsTV = (TextView) findViewById(R.id.instructions_text);
@@ -53,12 +53,17 @@ public class SetTimingsPage extends Activity {
             start = System.currentTimeMillis();
         } else {
             lineNumber = 0;
-            songToSet.setTimings(timeDifferences);
-            String displayTimings = "";
-            for (long time : timeDifferences) {
-                displayTimings += ((double)time / 1000) + ", ";
+            //songToSet.setTimings(timeDifferences); //just send this back??
+            Intent returnToMenu = new Intent();
+            long[] lineTimings = new long[timeDifferences.size()];
+            int i = 0;
+            for (Long time : timeDifferences) {
+                lineTimings[i] = time;
+                System.out.println("SET TIME: " + lineTimings[i]);
+                i++;
             }
-            System.out.println(displayTimings);
+            returnToMenu.putExtra("timingsArray", lineTimings);
+            setResult(RESULT_OK, returnToMenu);
             finish();
         }
     }

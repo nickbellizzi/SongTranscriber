@@ -53,5 +53,5 @@
         android:layout_margin="15dp"
         android:text="@string/submit_song_info_button_text"
         android:onClick="onSubmitSongInformation"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 </LinearLayout>

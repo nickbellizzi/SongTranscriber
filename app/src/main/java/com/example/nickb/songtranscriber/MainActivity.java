@@ -29,8 +29,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlaySongMenu(View view) {
-        Intent openPlayMenu = new Intent(this, PlaySongMenu.class);
-        startActivity(openPlayMenu);
+        //Intent openPlayMenu = new Intent(this, PlaySongMenu.class);
+        //pass song object songToPlay to PlaySongIPA
+        //startActivity(openPlayMenu);
+        Intent playSong = new Intent(this, PlaySongIPA.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("songToPlay", listOfSongs.get(0));
+        playSong.putExtras(bundle);
+        startActivity(playSong);
     }
 
     @Override
@@ -45,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putSerializable("songForTiming", newSubmission);
             getTimings.putExtras(bundle);
-            startActivity(getTimings);
+            startActivityForResult(getTimings, RESULT_TWO);
+        }
+
+        if (requestCode == RESULT_TWO && resultCode == RESULT_OK) {
+            System.out.println("back from set timings");
+            long[] lineTimes = data.getLongArrayExtra("timingsArray");
+            listOfSongs.get(listOfSongs.size() - 1).setTimings(lineTimes);
         }
     }
 }

@@ -25,6 +25,9 @@
         <activity android:name=".PlaySongMenu"
             android:label="Menu to Play Song"
             android:theme="@style/AppTheme" />
+        <activity android:name=".PlaySongIPA"
+            android:label="Play IPA Lyrics"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

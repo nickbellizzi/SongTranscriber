@@ -12,4 +12,5 @@
     <string name="start_timings_button_text">Start Timings</string>
     <string name="instructions_text">Instructions:\nBegin playing the song &amp; hit Start\nClick Next at the end of each line</string>
     <string name="next_timings_button">Next</string>
+    <string name="play_song_button_text">Play Song</string>
 </resources>
