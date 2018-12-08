@@ -22,7 +22,7 @@ public class NewSongMenu extends Activity {
         String artistName = String.valueOf(artistText.getText());
         EditText lyricsText = (EditText) findViewById(R.id.input_lyrics);
         String songLyrics = String.valueOf(lyricsText.getText());
-        SongInfo newSong = new SongInfo(songTitle, artistName, songLyrics);
+        SongInfo newSong = new SongInfo(songTitle, artistName, songLyrics, this);
         Log.i(NewSongMenu.class.getName(), "sos " + newSong.toString());
         // handle errors
         Intent returnToMenu = new Intent();

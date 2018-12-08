@@ -26,11 +26,7 @@ public class PlaySongIPA extends Activity {
         Intent passedObject = getIntent();
         songInfo = (SongInfo) passedObject.getSerializableExtra("songToPlay");
         lyricsIPA = songInfo.getIPA();
-        if (lyricsIPA == null) {
-            System.out.println("IPA LYRICS ARE NULL");
-        }
         timings = songInfo.getTimes();
-        System.out.println(Arrays.toString(timings));
         lineNumber = 0;
         lineTV = (TextView) findViewById(R.id.ipa_line_text_display);
         startBtn = (Button) findViewById(R.id.start_playback_button);
@@ -39,21 +35,19 @@ public class PlaySongIPA extends Activity {
     public void onStartSong(View view) {
         startBtn.setVisibility(View.INVISIBLE);
         lineTV.setVisibility(View.VISIBLE);
-        System.out.println("got here");
         final Handler handler = new Handler();
-        System.out.println("entered loop");
         handler.post(new Runnable() {
             @Override
             public void run() {
                 lineTV.setText(lyricsIPA[lineNumber]);
-                System.out.println(lyricsIPA[lineNumber] + " at line " + lineNumber);
                 if (lineNumber < lyricsIPA.length) {
                     handler.postDelayed(this, timings[lineNumber]);
+                } else {
+                    lineNumber = 0;
+                    finish();
                 }
                 lineNumber++;
             }
         });
-        lineNumber = 0;
-        //finish();
     }
 }
