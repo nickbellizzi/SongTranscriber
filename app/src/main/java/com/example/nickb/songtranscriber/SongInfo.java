@@ -74,9 +74,6 @@ public class SongInfo implements Serializable {
         }
         String simple = word; // preprocessed word?
         try {
-            /*HttpResponse<JsonNode> response = Unirest.get("https://wordsapiv1.p.rapidapi.com/words/" + simple + "/pronunciation")
-                    .header("X-RapidAPI-Key", "e578e68f77msheb452bc0de6aa22p186f2cjsn504e4028958e")
-                    .asJson();*/
             String apiResult = startAPICall(simple);
             System.out.println("api call");
             if (!apiResult.equals("ERROR")) {
@@ -117,7 +114,7 @@ public class SongInfo implements Serializable {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String>  params = new HashMap<String, String>();
-                    params.put("X-RapidAPI-Key", "e578e68f77msheb452bc0de6aa22p186f2cjsn504e4028958e");
+                    params.put("X-RapidAPI-Key", "apiKey");
                     return params;
                 }
             };
