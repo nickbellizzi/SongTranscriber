@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class NewSongMenu extends Activity {
 
-    private Map<String, String> previous;
+    public static Map<String, String> previous;
     private boolean callError;
     private RequestQueue requestQueue;
     private final String apiURL = "https://wordsapiv1.p.rapidapi.com/words/";
@@ -44,7 +44,9 @@ public class NewSongMenu extends Activity {
     private void loadPrevious() {
         previous = new HashMap<>();
         previous.put("isn't", "ˈɪzənt");
-        //do later
+        previous.put("come", "kʌm");
+        previous.put("jingling", "ˈʤɪŋgəlɪŋ");
+        //add more common words later
     }
 
     public void onSubmitSongInformation(View view) {
@@ -56,9 +58,11 @@ public class NewSongMenu extends Activity {
         EditText lyricsText = (EditText) findViewById(R.id.input_lyrics);
         String songLyrics = String.valueOf(lyricsText.getText());
         String[] lines = songLyrics.split("\\r?\\n");
-        String[] conversions = convertLines(lines);
-        SongInfo newSong = new SongInfo(songTitle, artistName, lines, conversions);
-        Log.i(NewSongMenu.class.getName(), "sos " + newSong.toString());
+        //String[] conversions = convertLines(lines);
+        loadConversions(lines);
+        System.out.println("converted lines??");
+        SongInfo newSong = new SongInfo(songTitle, artistName, lines, previous);
+        System.out.println("sos " + newSong.toString());
         // handle errors
         Intent returnToMenu = new Intent();
         Bundle bundle = new Bundle();
@@ -68,7 +72,22 @@ public class NewSongMenu extends Activity {
         finish();
     }
 
-    private String[] convertLines(String[] lines) {
+    private void loadConversions(String[] lines) {
+        for (String line : lines) {
+            convertLine(line.toLowerCase());
+        }
+    }
+
+    private void convertLine(String line) {
+        String[] words = line.trim().split(" ");
+        for (String word : words) {
+            if (!previous.containsKey(word)) {
+                startAPICall(word);
+            }
+        }
+    }
+
+    /*private String[] convertLines(String[] lines) {
         System.out.println("in convert lines");
         String[] ipaTranscriptions = new String[lines.length];
         for (int i = 0; i < lines.length; i++) {
@@ -87,7 +106,7 @@ public class NewSongMenu extends Activity {
         return transcribedLine.trim();
     }
 
-    private String convertWord(String word) {
+    private synchronized String convertWord(String word) {
         if (previous.containsKey(word)) {
             return previous.get(word);
         }
@@ -95,19 +114,31 @@ public class NewSongMenu extends Activity {
         callError = false;
         //preprocess word??
         startAPICall(word);
-        //while (!previous.containsKey(word) && !callError) {}
         try {
-            Thread.sleep(900);
+            /*while (!previous.containsKey(word)) {
+                wait();
+            }//
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            return "ErRoR";
+            System.out.println("Interruption");
         }
-        if (callError) {
-            return "ERROR";
+        //while (!previous.containsKey(word) && !callError) {}
+        /*for (int i = 0; i < 900; i++) {
+            if (previous.containsKey(word)) {
+                return previous.get(word);
+            }
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted Exception");
+            }
+        }//
+        if (previous.containsKey(word)) {
+            return previous.get(word);
         }
         System.out.println("BACK TO CONVERT WORDS");
-        return previous.get(word);
-    }
+        return "ERROR";
+    }*/
 
     private void startAPICall(final String word) {
         try {
@@ -150,9 +181,15 @@ public class NewSongMenu extends Activity {
             System.out.println("successful api response?");
             String ipaWord = response.getJSONObject("pronunciation").getString("all");
             previous.put(word, ipaWord);
-        } catch (JSONException e) {
-            System.out.println("got word, didn't parse correctly");
-            previous.put(word, "ERROR PARSING");
+        } catch (JSONException e1) {
+            try {
+                System.out.println("(only one entry for pronunciation)");
+                String ipaWord = response.getString("pronunciation");
+                previous.put(word, ipaWord);
+            } catch (JSONException e2) {
+                previous.put(word, "ERROR PARSING");
+                System.out.println("got word, didn't parse correctly");
+            }
         }
     }
 }

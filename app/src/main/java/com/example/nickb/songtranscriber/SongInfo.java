@@ -30,31 +30,37 @@ public class SongInfo implements Serializable {
     private String[] lines;
     private String[] ipaTranscriptions;
     private long[] lineTimings;
-    private Map<String, String> previous;
+    private Map<String, String> convertedWords;
 
     /*private RequestQueue requestQueue;
     private final String apiURL = "https://wordsapiv1.p.rapidapi.com/words/";
     private JSONObject jsonObject;*/
 
-    SongInfo(String title, String artist, String[] lyrics, String[] conversions) {
+    SongInfo(String title, String artist, String[] lyrics, Map<String, String> previous) {
         this.title = title;
         this.artist = artist;
         this.lines = lyrics;
-        this.ipaTranscriptions = conversions;
-        System.out.println("IPA Transcriptions: " + Arrays.toString(ipaTranscriptions));
+        this.convertedWords = previous;
+        ipaTranscriptions = new String[lines.length];
+        //this.ipaTranscriptions = conversions;
     }
 
-    /*private void convertLines() {
-        ipaTranscriptions = new String[]{
+    public void convertLines() {
+        /*ipaTranscriptions = new String[]{
                 "aɪm ˈlʊkɪŋ ˈoʊvər ə fɔr-lif ˈkloʊvər",
                 "aɪ ˈoʊvərˌlʊkt bɪˈfɔr",
                 "wʌn lif ɪz ˈsʌnˌʃaɪn, ðə ˈsɛkənd ɪz reɪn",
                 "θɜrd ɪz ðə ˈroʊzɪz ðæt groʊ ɪn ðə leɪn"
-        };
+        };*/
+        convertedWords = NewSongMenu.previous;
+        for (String key : convertedWords.keySet()) {
+            System.out.println(key + " is " + convertedWords.get(key));
+        }
         System.out.println("in convert lines");
         for (int i = 0; i < lines.length; i++) {
-            ipaTranscriptions[i] = convertLine(lines[i]);
+            ipaTranscriptions[i] = convertLine(lines[i].toLowerCase());
         }
+        System.out.println("IPA Transcriptions: " + Arrays.toString(ipaTranscriptions));
     }
 
     private String convertLine(String line) {
@@ -64,42 +70,20 @@ public class SongInfo implements Serializable {
         for (String word : words) {
             transcribedLine += convertWord(word) + " ";
         }
+        System.out.println("finished convertLine");
         return transcribedLine.trim();
     }
 
     private String convertWord(String word) {
-        System.out.println("in convert word");
-        word = word.toLowerCase();
-        if (previous.containsKey(word)) {
-            return previous.get(word);
+        System.out.println("in convert word, looking for " + word);
+        if (convertedWords.containsKey(word)) {
+            return convertedWords.get(word);
         }
-        String simple = word; // preprocessed word?
-        try {
-            startAPICall(simple);
-            System.out.println("api call finished");
-            if (jsonObject != null) {
-                try {
-                    System.out.println("successful api response?");
-                    return jsonObject.getJSONObject("pronunciation").getString("all");
-                } catch (JSONException e) {
-                    System.out.println("got word, didn't parse correctly");
-                    return "ERROR PARSING";
-                } catch (NullPointerException e) {
-                    System.out.println("json null!");
-                    return "json null!";
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            return "other error";
-        } catch (Exception e) {
-            System.out.println("exception" + e.toString());
-            e.printStackTrace();
-            return word;
-        }
+        return word;
+        //String simple = word; // preprocessed word?
     }
 
-    private void startAPICall(final String simple) {
+    /*private void startAPICall(final String simple) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,

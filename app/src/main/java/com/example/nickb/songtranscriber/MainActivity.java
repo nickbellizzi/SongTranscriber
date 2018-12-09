@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    /** List for multiple songs; currently only one used. */
     private List<SongInfo> listOfSongs;
 
     private final static int RESULT_ONE = 1;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == RESULT_ONE && resultCode == RESULT_OK) {
             SongInfo newSubmission = (SongInfo) data.getSerializableExtra("songSubmission");
-            System.out.println("New song " + newSubmission.toString() + " lines : " + newSubmission.getLines().length);
+            System.out.println("New Song : " + newSubmission.toString() + "; lines : " + newSubmission.getLines().length);
             listOfSongs.add(newSubmission);
             Intent getTimings = new Intent(this, SetTimingsPage.class);
             Bundle bundle = new Bundle();
@@ -57,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == RESULT_TWO && resultCode == RESULT_OK) {
             System.out.println("back from set timings");
             long[] lineTimes = data.getLongArrayExtra("timingsArray");
-            listOfSongs.get(listOfSongs.size() - 1).setTimings(lineTimes);
+            SongInfo songWithNewInfo = listOfSongs.get(listOfSongs.size() - 1);
+            songWithNewInfo.setTimings(lineTimes);
+            songWithNewInfo.convertLines();
         }
     }
 }
