@@ -1,28 +1,8 @@
 package com.example.nickb.songtranscriber;
 
-import android.content.Context;
-
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
-import com.android.volley.Network;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 
 public class SongInfo implements Serializable {
     private String title;
@@ -31,10 +11,6 @@ public class SongInfo implements Serializable {
     private String[] ipaTranscriptions;
     private long[] lineTimings;
     private Map<String, String> convertedWords;
-
-    /*private RequestQueue requestQueue;
-    private final String apiURL = "https://wordsapiv1.p.rapidapi.com/words/";
-    private JSONObject jsonObject;*/
 
     SongInfo(String title, String artist, String[] lyrics, Map<String, String> previous) {
         this.title = title;
@@ -80,47 +56,8 @@ public class SongInfo implements Serializable {
             return convertedWords.get(word);
         }
         return word;
-        //String simple = word; // preprocessed word?
+        //preprocess words later
     }
-
-    /*private void startAPICall(final String simple) {
-        try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.GET,
-                    apiURL + simple,
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            System.out.println(simple);
-                            System.out.println("got json response!");
-                            jsonObject = response;
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            System.out.println("api error! " + error.toString());
-                        }
-                    }
-            ) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String>  params = new HashMap<>();
-                    params.put("X-RapidAPI-Key", "e578e68f77msheb452bc0de6aa22p186f2cjsn504e4028958e");
-                    return params;
-                }
-            };
-            requestQueue.add(jsonObjectRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadPrevious() {
-        previous = new HashMap<>();
-        previous.put("isn't", "ˈɪzənt"); //do later
-    }*/
 
     public String[] getLines() {
         return lines;

@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlaySongMenu(View view) {
-        //Intent openPlayMenu = new Intent(this, PlaySongMenu.class);
-        //pass song object songToPlay to PlaySongIPA
-        //startActivity(openPlayMenu);
+        //Create play menu of multiple songs using list later
+        /*Intent openPlayMenu = new Intent(this, PlaySongMenu.class);
+        pass song object songToPlay to PlaySongIPA
+        startActivity(openPlayMenu);*/
         Intent playSong = new Intent(this, PlaySongIPA.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("songToPlay", listOfSongs.get(0));

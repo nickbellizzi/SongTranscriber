@@ -3,20 +3,14 @@ package com.example.nickb.songtranscriber;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
-import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -29,7 +23,6 @@ import java.util.Map;
 public class NewSongMenu extends Activity {
 
     public static Map<String, String> previous;
-    private boolean callError;
     private RequestQueue requestQueue;
     private final String apiURL = "https://wordsapiv1.p.rapidapi.com/words/";
 
@@ -46,6 +39,7 @@ public class NewSongMenu extends Activity {
         previous.put("isn't", "ˈɪzənt");
         previous.put("come", "kʌm");
         previous.put("jingling", "ˈʤɪŋgəlɪŋ");
+        previous.put("bells", "bɛlz");
         //add more common words later
     }
 
@@ -58,7 +52,6 @@ public class NewSongMenu extends Activity {
         EditText lyricsText = (EditText) findViewById(R.id.input_lyrics);
         String songLyrics = String.valueOf(lyricsText.getText());
         String[] lines = songLyrics.split("\\r?\\n");
-        //String[] conversions = convertLines(lines);
         loadConversions(lines);
         System.out.println("converted lines??");
         SongInfo newSong = new SongInfo(songTitle, artistName, lines, previous);
@@ -87,59 +80,6 @@ public class NewSongMenu extends Activity {
         }
     }
 
-    /*private String[] convertLines(String[] lines) {
-        System.out.println("in convert lines");
-        String[] ipaTranscriptions = new String[lines.length];
-        for (int i = 0; i < lines.length; i++) {
-            ipaTranscriptions[i] = convertLine(lines[i].toLowerCase());
-        }
-        return ipaTranscriptions;
-    }
-
-    private String convertLine(String line) {
-        System.out.println("in convert line");
-        String[] words = line.trim().split(" ");
-        String transcribedLine = "";
-        for (String word : words) {
-            transcribedLine += convertWord(word) + " ";
-        }
-        return transcribedLine.trim();
-    }
-
-    private synchronized String convertWord(String word) {
-        if (previous.containsKey(word)) {
-            return previous.get(word);
-        }
-        System.out.println("in convert word");
-        callError = false;
-        //preprocess word??
-        startAPICall(word);
-        try {
-            /*while (!previous.containsKey(word)) {
-                wait();
-            }//
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            System.out.println("Interruption");
-        }
-        //while (!previous.containsKey(word) && !callError) {}
-        /*for (int i = 0; i < 900; i++) {
-            if (previous.containsKey(word)) {
-                return previous.get(word);
-            }
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                System.out.println("Interrupted Exception");
-            }
-        }//
-        if (previous.containsKey(word)) {
-            return previous.get(word);
-        }
-        System.out.println("BACK TO CONVERT WORDS");
-        return "ERROR";
-    }*/
-
     private void startAPICall(final String word) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -159,7 +99,6 @@ public class NewSongMenu extends Activity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             System.out.println("api error! " + error.toString());
-                            callError = true;
                         }
                     }
             ) {
@@ -187,7 +126,7 @@ public class NewSongMenu extends Activity {
                 String ipaWord = response.getString("pronunciation");
                 previous.put(word, ipaWord);
             } catch (JSONException e2) {
-                previous.put(word, "ERROR PARSING");
+                previous.put(word, word);
                 System.out.println("got word, didn't parse correctly");
             }
         }
