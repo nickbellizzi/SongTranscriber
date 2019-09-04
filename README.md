@@ -7,11 +7,12 @@ Many students in linguistics or second language learners study the International
 Use of the app is explained [here].
 
 ## Tools
-The [WordsAPI] was the principal addition used for this app, needed to facilitate the conversion from English to IPA. Also used was [Volley], an HTTP library for making API requests.
+The [WordsAPI] was the principal addition used for this app, needed to facilitate the conversion from English to IPA. (Users should obtain an API key from [RapidAPI] to use.) Also used was [Volley], an HTTP library for making API requests.
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
    [WordsAPI]: <https://www.wordsapi.com/>
+   [RapidAPI]: <https://rapidapi.com/dpventures/api/wordsapi/pricing>
    [here]: <https://www.youtube.com/watch?v=fjkOAoxchKc>
    [IPA]: <https://en.wikipedia.org/wiki/International_Phonetic_Alphabet>
    [Volley]: <https://developer.android.com/training/volley>
